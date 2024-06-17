@@ -18,6 +18,8 @@
 #include <string>
 #include <vector>
 
+#include <absl/strings/str_cat.h>
+
 namespace operations_research {
 
 // Custom logger class. It allows passing callbacks to process log messages.

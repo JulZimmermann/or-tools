@@ -13,6 +13,29 @@
 
 # This file is just an orchestration
 cmake_minimum_required(VERSION 3.18)
+
+
+file(READ ${CMAKE_SOURCE_DIR}/vcpkg.json VCPKG_JSON)
+string(JSON PROJECT_VERSION GET ${VCPKG_JSON} version-string)
+string(JSON VCPKG_VERSION GET ${VCPKG_JSON} builtin-baseline)
+
+if(NOT VCPKG_DIR)
+  set(VCPKG_DIR ${CMAKE_BINARY_DIR}/vcpkg)
+endif()
+
+file(TO_CMAKE_PATH ${VCPKG_DIR} VCPKG_DIR)
+
+if(NOT CMAKE_TOOLCHAIN_FILE)
+  if(NOT (EXISTS ${VCPKG_DIR}))
+    execute_process(COMMAND git clone https://github.com/Microsoft/vcpkg.git ${VCPKG_DIR})
+  endif()
+
+  execute_process(COMMAND git fetch WORKING_DIRECTORY ${VCPKG_DIR})
+  execute_process(COMMAND git checkout ${VCPKG_VERSION} WORKING_DIRECTORY ${VCPKG_DIR})
+  set(CMAKE_TOOLCHAIN_FILE ${VCPKG_DIR}/scripts/buildsystems/vcpkg.cmake)
+endif()
+
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(utils)

@@ -1,0 +1,14 @@
+{
+  "name": "or-tools",
+  "version-string": "0.0.1",
+  "dependencies": [
+    "zlib",
+    "re2",
+    "abseil",
+    "protobuf",
+    "eigen3",
+    "coin-or-cbc"
+  ],
+  "builtin-baseline": "4c366a791476b23e62c1d904852cbe30b654836b"
+}
+ 

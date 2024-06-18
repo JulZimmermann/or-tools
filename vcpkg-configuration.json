@@ -1,0 +1,10 @@
+{
+  "registries": [
+    {
+      "kind": "git",
+      "repository": "https://wm-gti@dev.azure.com/wm-gti/GTI/_git/vcpkg_ports",
+      "packages": [ "coin-or-cbc", "coin-or-cgl", "coin-or-clp", "coin-or-osi", "coinutils"],
+      "baseline": "9ae1b2f1cfcb332b09434a1e5ba602323e47dc26"
+    }
+  ]
+}

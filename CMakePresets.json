@@ -1,0 +1,46 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "clang-18-linux",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/clang-18",
+      "cacheVariables": {
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/toolchain/amd64-linux-clang-18.cmake",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-triplets",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-clang-18",
+        "VCPKG_HOST_TRIPLET": "x64-linux-clang-18",
+        "CMAKE_CXX_FLAGS": "-Werror -Wall -Wextra -Wno-deprecated-declarations -Wno-unused-parameter",
+        
+        "USE_COINOR": "ON",
+        "USE_SCIP": "OFF",
+        "USE_HIGHS": "OFF",
+
+        "BUILD_TESTING": "OFF",
+        "BUILD_DEPS": "OFF",
+        "BUILD_SAMPLES": "OFF",
+        "BUILD_EXAMPLES": "OFF",
+        "BUILD_FLATZINC": "OFF",
+        "INSTALL_DOC": "OFF"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "clang-18-linux-debug",
+      "binaryDir": "${sourceDir}/build/clang-18-debug",
+      "inherits": "clang-18-linux",
+      "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ]
+}
